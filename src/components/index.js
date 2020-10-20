@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Modal from "./Modal";
 import ProductList from "./ProductList";
 
 export default class Home extends Component {
@@ -6,6 +7,7 @@ export default class Home extends Component {
     {
       tenSP: "VinSmart Live",
       maSP: 1,
+      giaThanh: 9000000,
       manHinh: `AMOLED, FHD+ 2232 x 1080 pixels`,
       linhAnh: "./img/vsphone.jpg",
       heDieuHanh: "Android 9.0 (Pie)",
@@ -17,6 +19,7 @@ export default class Home extends Component {
     {
       tenSP: "Meizu 16Xs",
       maSP: 2,
+      giaThanh: 7000000,
       manHinh: `AMOLED, 6.2", Full HD+`,
       linhAnh: "./img/meizuphone.jpg",
       heDieuHanh: "Android 9.0 (Pie)",
@@ -28,6 +31,7 @@ export default class Home extends Component {
     {
       tenSP: "Iphone XS Max",
       maSP: 3,
+      giaThanh: 20000000,
       manHinh: `OLED, 6.5", 1242 x 2688 Pixels`,
       linhAnh: "./img/applephone.jpg",
       heDieuHanh: "iOS 14.0",
@@ -37,6 +41,45 @@ export default class Home extends Component {
       rom: "64GB",
     },
   ];
+  state = {
+    productDetail: {
+      tenSP: "VinSmart Live",
+      maSP: 1,
+      manHinh: `AMOLED, FHD+ 2232 x 1080 pixels`,
+      linhAnh: "./img/vsphone.jpg",
+      heDieuHanh: "Android 9.0 (Pie)",
+      camTruoc: "20 MP",
+      camSau: "Chính 48 MP & Phụ 8 MP, 5 MP",
+      ram: "4 GB",
+      rom: "64GB",
+    },
+    cartList: [],
+  };
+  handleProductDetail = (product) => {
+    const index = this.productList.findIndex((item) => {
+      return item.maSP === product.maSP;
+    });
+    this.setState({
+      productDetail: this.productList[index],
+    });
+  };
+  handleAddProduct = (product) => {
+    let cartList = [...this.state.cartList];
+    const index = cartList.findIndex((item) => {
+      return item.maSP === product.maSP;
+    });
+    if (index !== -1) {
+      cartList[index].soLuong++;
+    } else {
+      product.soLuong = 1;
+      cartList = [...cartList, product];
+    }
+
+    this.setState({
+      cartList,
+    });
+  };
+
   render() {
     return (
       <div>
@@ -53,7 +96,11 @@ export default class Home extends Component {
           </div>
           <div className="container danh-sach-san-pham">
             <div className="row">
-              <ProductList productList={this.productList} />
+              <ProductList
+                productList={this.productList}
+                handleProductDetail={this.handleProductDetail}
+                handleAddProduct={this.handleAddProduct}
+              />
             </div>
           </div>
           <div
@@ -64,56 +111,14 @@ export default class Home extends Component {
             aria-labelledby="modelTitleId"
             aria-hidden="true"
           >
-            <div
-              className="modal-dialog"
-              role="document"
-              style={{ maxWidth: 1000 }}
-            >
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Giỏ hàng</h5>
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Mã sản phẩm</th>
-                        <th>tên sản phẩm</th>
-                        <th>hình ảnh</th>
-                        <th>số lượng</th>
-                        <th>đơn giá</th>
-                        <th>thành tiền</th>
-                      </tr>
-                    </thead>
-                    <tbody />
-                  </table>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save
-                  </button>
-                </div>
-              </div>
-            </div>
+            <Modal cartList={this.state.cartList} />
           </div>
           <div className="row">
             <div className="col-sm-5">
-              <img className="img-fluid" src="./img/meizuphone.jpg" alt />
+              <img
+                className="img-fluid"
+                src={this.state.productDetail.linhAnh}
+              />
             </div>
             <div className="col-sm-7">
               <h3>Thông số kỹ thuật</h3>
@@ -121,27 +126,27 @@ export default class Home extends Component {
                 <tbody>
                   <tr>
                     <td>Màn hình</td>
-                    <td>AMOLED, FHD+ 2232 x 1080 pixels</td>
+                    <td>{this.state.productDetail.tenSP}</td>
                   </tr>
                   <tr>
                     <td>Hệ điều hành</td>
-                    <td>Android 9.0 (Pie)</td>
+                    <td>{this.state.productDetail.heDieuHanh}</td>
                   </tr>
                   <tr>
                     <td>Camera trước</td>
-                    <td>20 MP</td>
+                    <td>{this.state.productDetail.camTruoc}</td>
                   </tr>
                   <tr>
                     <td>Camera sau</td>
-                    <td>Chính 48 MP &amp; Phụ 8 MP, 5 MP</td>
+                    <td>{this.state.productDetail.camSau}</td>
                   </tr>
                   <tr>
                     <td>RAM</td>
-                    <td>4 GB</td>
+                    <td>{this.state.productDetail.ram}</td>
                   </tr>
                   <tr>
                     <td>ROM</td>
-                    <td>6 GB</td>
+                    <td>{this.state.productDetail.rom}</td>
                   </tr>
                 </tbody>
               </table>
