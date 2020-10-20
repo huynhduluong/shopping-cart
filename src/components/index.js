@@ -79,6 +79,11 @@ export default class Home extends Component {
       cartList,
     });
   };
+  renderShoppingCart = () => {
+    return this.state.cartList.reduce((sum, item) => {
+      return (sum += item.soLuong);
+    }, 0);
+  };
 
   render() {
     return (
@@ -91,7 +96,7 @@ export default class Home extends Component {
               data-toggle="modal"
               data-target="#modelId"
             >
-              Giỏ hàng (0)
+              Giỏ hàng ({this.renderShoppingCart()})
             </button>
           </div>
           <div className="container danh-sach-san-pham">
