@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class CardItem extends Component {
   render() {
-    const { product } = this.props;
+    const { product, handleDelete, handleChangeAmount } = this.props;
     return (
       <tr className="card-item">
         <td>{product.maSP}</td>
@@ -11,14 +11,33 @@ export default class CardItem extends Component {
           <img src={product.linkAnh} width={50} />
         </td>
         <td>
-          <button>-</button>
+          <button
+            onClick={() => {
+              handleChangeAmount(product, false);
+            }}
+          >
+            -
+          </button>
           {product.soLuong}
-          <button>+</button>
+          <button
+            onClick={() => {
+              handleChangeAmount(product, true);
+            }}
+          >
+            +
+          </button>
         </td>
         <td>{product.giaThanh}</td>
-        <td>{product.giaThanh*product.soLuong}</td>
+        <td>{product.giaThanh * product.soLuong}</td>
         <td>
-          <button className="btn btn-danger">Delete</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              handleDelete(product);
+            }}
+          >
+            Delete
+          </button>
         </td>
       </tr>
     );

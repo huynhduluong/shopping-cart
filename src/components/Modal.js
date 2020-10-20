@@ -4,7 +4,14 @@ import CardItem from "./CardItem";
 export default class Modal extends Component {
   renderProduct = () => {
     return this.props.cartList.map((item) => {
-      return <CardItem key={item.maSP} product={item} />;
+      return (
+        <CardItem
+          key={item.maSP}
+          product={item}
+          handleDelete={this.props.handleDelete}
+          handleChangeAmount={this.props.handleChangeAmount}
+        />
+      );
     });
   };
 

@@ -84,6 +84,29 @@ export default class Home extends Component {
       return (sum += item.soLuong);
     }, 0);
   };
+  handleDelete = (product) => {
+    let cartList = this.state.cartList.filter((item) => {
+      return item.maSP !== product.maSP;
+    });
+    this.setState({
+      cartList,
+    });
+  };
+  handleChangeAmount = (product, status) => {
+    let cartList = [...this.state.cartList];
+    const index = cartList.findIndex((item) => {
+      return item.maSP === product.maSP;
+    });
+    if (status) {
+      cartList[index].soLuong++;
+    } else {
+      cartList[index].soLuong--;
+    }
+
+    this.setState({
+      cartList,
+    });
+  };
 
   render() {
     return (
@@ -116,7 +139,11 @@ export default class Home extends Component {
             aria-labelledby="modelTitleId"
             aria-hidden="true"
           >
-            <Modal cartList={this.state.cartList} />
+            <Modal
+              cartList={this.state.cartList}
+              handleDelete={this.handleDelete}
+              handleChangeAmount={this.handleChangeAmount}
+            />
           </div>
           <div className="row">
             <div className="col-sm-5">
