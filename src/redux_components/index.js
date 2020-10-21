@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Modal from "./Modal";
 import ProductList from "./ProductList";
 
-export default class Home extends Component {
+class Home extends Component {
   // productList = [
   //   {
   //     tenSP: "VinSmart Live",
@@ -42,17 +43,17 @@ export default class Home extends Component {
   //   },
   // ];
   state = {
-    productDetail: {
-      tenSP: "VinSmart Live",
-      maSP: 1,
-      manHinh: `AMOLED, FHD+ 2232 x 1080 pixels`,
-      linhAnh: "./img/vsphone.jpg",
-      heDieuHanh: "Android 9.0 (Pie)",
-      camTruoc: "20 MP",
-      camSau: "Chính 48 MP & Phụ 8 MP, 5 MP",
-      ram: "4 GB",
-      rom: "64GB",
-    },
+    // productDetail: {
+    //   tenSP: "VinSmart Live",
+    //   maSP: 1,
+    //   manHinh: `AMOLED, FHD+ 2232 x 1080 pixels`,
+    //   linhAnh: "./img/vsphone.jpg",
+    //   heDieuHanh: "Android 9.0 (Pie)",
+    //   camTruoc: "20 MP",
+    //   camSau: "Chính 48 MP & Phụ 8 MP, 5 MP",
+    //   ram: "4 GB",
+    //   rom: "64GB",
+    // },
     cartList: [],
   };
   handleProductDetail = (product) => {
@@ -126,7 +127,7 @@ export default class Home extends Component {
             <div className="row">
               <ProductList
                 // productList={this.productList}
-                handleProductDetail={this.handleProductDetail}
+                // handleProductDetail={this.handleProductDetail}
                 handleAddProduct={this.handleAddProduct}
               />
             </div>
@@ -149,7 +150,7 @@ export default class Home extends Component {
             <div className="col-sm-5">
               <img
                 className="img-fluid"
-                src={this.state.productDetail.linhAnh}
+                src={this.props.productDetail.linhAnh}
               />
             </div>
             <div className="col-sm-7">
@@ -158,27 +159,27 @@ export default class Home extends Component {
                 <tbody>
                   <tr>
                     <td>Màn hình</td>
-                    <td>{this.state.productDetail.tenSP}</td>
+                    <td>{this.props.productDetail.tenSP}</td>
                   </tr>
                   <tr>
                     <td>Hệ điều hành</td>
-                    <td>{this.state.productDetail.heDieuHanh}</td>
+                    <td>{this.props.productDetail.heDieuHanh}</td>
                   </tr>
                   <tr>
                     <td>Camera trước</td>
-                    <td>{this.state.productDetail.camTruoc}</td>
+                    <td>{this.props.productDetail.camTruoc}</td>
                   </tr>
                   <tr>
                     <td>Camera sau</td>
-                    <td>{this.state.productDetail.camSau}</td>
+                    <td>{this.props.productDetail.camSau}</td>
                   </tr>
                   <tr>
                     <td>RAM</td>
-                    <td>{this.state.productDetail.ram}</td>
+                    <td>{this.props.productDetail.ram}</td>
                   </tr>
                   <tr>
                     <td>ROM</td>
-                    <td>{this.state.productDetail.rom}</td>
+                    <td>{this.props.productDetail.rom}</td>
                   </tr>
                 </tbody>
               </table>
@@ -189,3 +190,11 @@ export default class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    productDetail: state.shoppingCartReducer.productDetail,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

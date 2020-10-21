@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { actDetail } from "../redux/actions";
 
 class ProductList extends Component {
   renderList = () => {
@@ -45,4 +46,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ProductList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleProductDetail: (product) => {
+      dispatch(actDetail(product));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

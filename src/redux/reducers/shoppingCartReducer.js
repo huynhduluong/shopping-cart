@@ -1,3 +1,5 @@
+import { DETAIL_PRODUCT } from "../constant";
+
 const initialState = {
   productList: [
     {
@@ -37,12 +39,26 @@ const initialState = {
       rom: "64GB",
     },
   ],
+  productDetail: {
+    tenSP: "VinSmart Live",
+    maSP: 1,
+    manHinh: `AMOLED, FHD+ 2232 x 1080 pixels`,
+    linhAnh: "./img/vsphone.jpg",
+    heDieuHanh: "Android 9.0 (Pie)",
+    camTruoc: "20 MP",
+    camSau: "Chính 48 MP & Phụ 8 MP, 5 MP",
+    ram: "4 GB",
+    rom: "64GB",
+  },
 };
 
 const shoppingCartReducer = (state = initialState, actions) => {
   switch (actions.type) {
+    case DETAIL_PRODUCT: {
+      state.productDetail = actions.payload;
+      return { ...state };
+    }
     default:
-      console.log(initialState);
       return { ...state };
   }
 };
