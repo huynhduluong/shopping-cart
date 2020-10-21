@@ -1,9 +1,15 @@
-import ProductList from "../../redux_components/ProductList";
-import { DETAIL_PRODUCT } from "../constant";
+import { ADD_PRODUCT, DETAIL_PRODUCT } from "../constant";
 
-export const actDetail = (product) => {
+export const actDetailProduct = (product) => {
   return {
     type: DETAIL_PRODUCT,
+    payload: product,
+  };
+};
+
+export const actAddProduct = (product) => {
+  return {
+    type: ADD_PRODUCT,
     payload: product,
   };
 };

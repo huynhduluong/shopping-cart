@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actDetail } from "../redux/actions";
+import { actAddProduct, actDetailProduct } from "../redux/actions";
 
 class ProductList extends Component {
   renderList = () => {
@@ -49,7 +49,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleProductDetail: (product) => {
-      dispatch(actDetail(product));
+      dispatch(actDetailProduct(product));
+    },
+    handleAddProduct: (product) => {
+      dispatch(actAddProduct(product));
     },
   };
 };

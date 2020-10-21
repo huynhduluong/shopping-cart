@@ -56,30 +56,30 @@ class Home extends Component {
     // },
     cartList: [],
   };
-  handleProductDetail = (product) => {
-    const index = this.productList.findIndex((item) => {
-      return item.maSP === product.maSP;
-    });
-    this.setState({
-      productDetail: this.productList[index],
-    });
-  };
-  handleAddProduct = (product) => {
-    let cartList = [...this.state.cartList];
-    const index = cartList.findIndex((item) => {
-      return item.maSP === product.maSP;
-    });
-    if (index !== -1) {
-      cartList[index].soLuong++;
-    } else {
-      product.soLuong = 1;
-      cartList = [...cartList, product];
-    }
+  // handleProductDetail = (product) => {
+  //   const index = this.productList.findIndex((item) => {
+  //     return item.maSP === product.maSP;
+  //   });
+  //   this.setState({
+  //     productDetail: this.productList[index],
+  //   });
+  // };
+  // handleAddProduct = (product) => {
+  //   let cartList = [...this.state.cartList];
+  //   const index = cartList.findIndex((item) => {
+  //     return item.maSP === product.maSP;
+  //   });
+  //   if (index !== -1) {
+  //     cartList[index].soLuong++;
+  //   } else {
+  //     product.soLuong = 1;
+  //     cartList = [...cartList, product];
+  //   }
 
-    this.setState({
-      cartList,
-    });
-  };
+  //   this.setState({
+  //     cartList,
+  //   });
+  // };
   renderShoppingCart = () => {
     return this.state.cartList.reduce((sum, item) => {
       return (sum += item.soLuong);
@@ -141,7 +141,7 @@ class Home extends Component {
             aria-hidden="true"
           >
             <Modal
-              cartList={this.state.cartList}
+              // cartList={this.state.cartList}
               handleDelete={this.handleDelete}
               handleChangeAmount={this.handleChangeAmount}
             />

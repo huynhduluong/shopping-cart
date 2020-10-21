@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import CardItem from "./CardItem";
 
-export default class Modal extends Component {
+class Modal extends Component {
   renderProduct = () => {
     return this.props.cartList.map((item) => {
       return (
@@ -62,3 +63,11 @@ export default class Modal extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cartList: state.shoppingCartReducer.cartList,
+  };
+};
+
+export default connect(mapStateToProps)(Modal);
