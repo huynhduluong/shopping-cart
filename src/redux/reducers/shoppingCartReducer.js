@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, DETAIL_PRODUCT } from "../constant";
+import { ADD_PRODUCT, DELETE_PRODUCT, DETAIL_PRODUCT } from "../constant";
 
 const initialState = {
   productList: [
@@ -71,6 +71,13 @@ const shoppingCartReducer = (state = initialState, actions) => {
         product.soLuong = 1;
         cartList = [...cartList, product];
       }
+      state.cartList = cartList;
+      return { ...state };
+    }
+    case DELETE_PRODUCT: {
+      let cartList = state.cartList.filter((item) => {
+        return item.maSP !== actions.payload.maSP;
+      });
       state.cartList = cartList;
       return { ...state };
     }

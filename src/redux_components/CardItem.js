@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { actDeleteProduct } from "../redux/actions";
 
-export default class CardItem extends Component {
+class CardItem extends Component {
   render() {
     const { product, handleDelete, handleChangeAmount } = this.props;
     return (
@@ -43,3 +45,13 @@ export default class CardItem extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleDelete: (product) => {
+      dispatch(actDeleteProduct(product));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CardItem);
