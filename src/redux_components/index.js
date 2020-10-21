@@ -54,7 +54,7 @@ class Home extends Component {
     //   ram: "4 GB",
     //   rom: "64GB",
     // },
-    cartList: [],
+    // cartList: [],
   };
   // handleProductDetail = (product) => {
   //   const index = this.productList.findIndex((item) => {
@@ -81,7 +81,7 @@ class Home extends Component {
   //   });
   // };
   renderShoppingCart = () => {
-    return this.state.cartList.reduce((sum, item) => {
+    return this.props.cartList.reduce((sum, item) => {
       return (sum += item.soLuong);
     }, 0);
   };
@@ -141,7 +141,6 @@ class Home extends Component {
             aria-hidden="true"
           >
             <Modal
-              // cartList={this.state.cartList}
               handleDelete={this.handleDelete}
               handleChangeAmount={this.handleChangeAmount}
             />
@@ -194,6 +193,7 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     productDetail: state.shoppingCartReducer.productDetail,
+    cartList: state.shoppingCartReducer.cartList,
   };
 };
 
