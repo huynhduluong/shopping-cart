@@ -1,4 +1,9 @@
-import { ADD_PRODUCT, DELETE_PRODUCT, DETAIL_PRODUCT } from "../constant";
+import {
+  ADD_PRODUCT,
+  CHANGE_AMOUNT,
+  DELETE_PRODUCT,
+  DETAIL_PRODUCT,
+} from "../constant";
 
 export const actDetailProduct = (product) => {
   return {
@@ -17,5 +22,13 @@ export const actDeleteProduct = (product) => {
   return {
     type: DELETE_PRODUCT,
     payload: product,
+  };
+};
+
+export const actChangeAmount = (product, status) => {
+  return {
+    type: CHANGE_AMOUNT,
+    payload: product,
+    status,
   };
 };

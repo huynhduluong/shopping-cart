@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actDeleteProduct } from "../redux/actions";
+import { actChangeAmount, actDeleteProduct } from "../redux/actions";
 
 class CardItem extends Component {
   render() {
@@ -50,6 +50,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleDelete: (product) => {
       dispatch(actDeleteProduct(product));
+    },
+    handleChangeAmount: (product, status) => {
+      dispatch(actChangeAmount(product, status));
     },
   };
 };

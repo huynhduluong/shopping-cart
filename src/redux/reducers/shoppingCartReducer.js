@@ -1,4 +1,9 @@
-import { ADD_PRODUCT, DELETE_PRODUCT, DETAIL_PRODUCT } from "../constant";
+import {
+  ADD_PRODUCT,
+  CHANGE_AMOUNT,
+  DELETE_PRODUCT,
+  DETAIL_PRODUCT,
+} from "../constant";
 
 const initialState = {
   productList: [
@@ -61,13 +66,16 @@ const shoppingCartReducer = (state = initialState, actions) => {
     }
     case ADD_PRODUCT: {
       let cartList = [...state.cartList];
-      let product = actions.payload;
       const index = cartList.findIndex((item) => {
-        return item.maSP === product.maSP;
+        return item.maSP === actions.payload.maSP;
       });
+
       if (index !== -1) {
-        cartList[index].soLuong++;
+        let product = { ...cartList[index] };
+        product.soLuong++;
+        cartList[index] = product;
       } else {
+        let product = actions.payload;
         product.soLuong = 1;
         cartList = [...cartList, product];
       }
@@ -79,6 +87,25 @@ const shoppingCartReducer = (state = initialState, actions) => {
         return item.maSP !== actions.payload.maSP;
       });
       state.cartList = cartList;
+      return { ...state };
+    }
+    case CHANGE_AMOUNT: {
+      let updateList = [...state.cartList];
+      const index = state.cartList.findIndex((item) => {
+        return item.maSP === actions.payload.maSP;
+      });
+      const product = { ...updateList[index] };
+      if (actions.status) {
+        product.soLuong++;
+      } else {
+        if (product.soLuong > 1) {
+          product.soLuong--;
+        }
+      }
+
+      updateList[index] = product;
+
+      state.cartList = updateList;
       return { ...state };
     }
     default:

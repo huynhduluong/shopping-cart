@@ -9,8 +9,8 @@ class Modal extends Component {
         <CardItem
           key={item.maSP}
           product={item}
-          handleDelete={this.props.handleDelete}
-          handleChangeAmount={this.props.handleChangeAmount}
+          // handleDelete={this.props.handleDelete}
+          // handleChangeAmount={this.props.handleChangeAmount}
         />
       );
     });

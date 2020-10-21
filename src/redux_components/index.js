@@ -85,29 +85,29 @@ class Home extends Component {
       return (sum += item.soLuong);
     }, 0);
   };
-  handleDelete = (product) => {
-    let cartList = this.state.cartList.filter((item) => {
-      return item.maSP !== product.maSP;
-    });
-    this.setState({
-      cartList,
-    });
-  };
-  handleChangeAmount = (product, status) => {
-    let cartList = [...this.state.cartList];
-    const index = cartList.findIndex((item) => {
-      return item.maSP === product.maSP;
-    });
-    if (status) {
-      cartList[index].soLuong++;
-    } else {
-      cartList[index].soLuong--;
-    }
+  // handleDelete = (product) => {
+  //   let cartList = this.state.cartList.filter((item) => {
+  //     return item.maSP !== product.maSP;
+  //   });
+  //   this.setState({
+  //     cartList,
+  //   });
+  // };
+  // handleChangeAmount = (product, status) => {
+  //   let cartList = [...this.state.cartList];
+  //   const index = cartList.findIndex((item) => {
+  //     return item.maSP === product.maSP;
+  //   });
+  //   if (status) {
+  //     cartList[index].soLuong++;
+  //   } else {
+  //     cartList[index].soLuong--;
+  //   }
 
-    this.setState({
-      cartList,
-    });
-  };
+  //   this.setState({
+  //     cartList,
+  //   });
+  // };
 
   render() {
     return (
@@ -141,8 +141,8 @@ class Home extends Component {
             aria-hidden="true"
           >
             <Modal
-              handleDelete={this.handleDelete}
-              handleChangeAmount={this.handleChangeAmount}
+              // handleDelete={this.handleDelete}
+              // handleChangeAmount={this.handleChangeAmount}
             />
           </div>
           <div className="row">
