@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class ProductList extends Component {
+class ProductList extends Component {
   renderList = () => {
     const { productList, handleProductDetail, handleAddProduct } = this.props;
     return productList.map((item, index) => {
@@ -37,3 +38,11 @@ export default class ProductList extends Component {
     return <div className="row">{this.renderList()}</div>;
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    productList: state.shoppingCartReducer.productList,
+  };
+};
+
+export default connect(mapStateToProps, null)(ProductList);
